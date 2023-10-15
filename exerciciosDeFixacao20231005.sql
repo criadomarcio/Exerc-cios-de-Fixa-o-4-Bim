@@ -18,3 +18,39 @@ def total_livros_por_genero(genero):
 
     return total
 
+-- 2. Função para Listar Livros de um Autor Específico
+def listar_livros_por_autor(primeiro_nome, ultimo_nome):
+    
+    conn = conectar_banco_de_dados()
+    cursor = conn.cursor()
+
+   
+    consulta_autor = f"SELECT id_autor FROM Autor WHERE primeiro_nome = '{primeiro_nome}' AND ultimo_nome = '{ultimo_nome}'"
+
+    
+    cursor.execute(consulta_autor)
+
+    
+    id_autor = cursor.fetchone()
+
+    if id_autor:
+        
+        consulta_livros = f"SELECT titulo FROM Livro_Autor WHERE id_autor = {id_autor[0]}"
+
+      
+        cursor.execute(consulta_livros)
+
+       
+        titulos = [livro[0] for livro in cursor.fetchall()]
+
+        s
+        cursor.close()
+        conn.close()
+
+        return titulos
+    else:
+        
+        cursor.close()
+        conn.close()
+        return []
+
