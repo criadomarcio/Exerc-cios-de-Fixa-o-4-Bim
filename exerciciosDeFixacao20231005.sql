@@ -54,3 +54,21 @@ def listar_livros_por_autor(primeiro_nome, ultimo_nome):
         conn.close()
         return []
 
+-- 3. Função para Atualizar Resumos de Livros
+def atualizar_resumos():
+    
+    conn = conectar_banco_de_dados()
+    cursor = conn.cursor()
+
+    
+    consulta = "UPDATE Livro SET resumo = CONCAT(resumo, ' Este é um excelente livro!')"
+
+    
+    cursor.execute(consulta)
+
+    
+    conn.commit()
+
+   
+    cursor.close()
+    conn.close()
