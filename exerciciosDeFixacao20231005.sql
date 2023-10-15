@@ -72,3 +72,24 @@ def atualizar_resumos():
    
     cursor.close()
     conn.close()
+
+-- 4. Função para Obter a Média de Livros por Editora
+def media_livros_por_editora():
+   
+    conn = conectar_banco_de_dados()
+    cursor = conn.cursor()
+
+   
+    consulta = "SELECT editora, AVG(num_livros) FROM (SELECT editora, COUNT(*) as num_livros FROM Livro GROUP BY editora) AS subquery GROUP BY editora"
+
+   
+    cursor.execute(consulta)
+
+   
+    resultados = cursor.fetchall()
+
+    
+    cursor.close()
+    conn.close()
+
+    return resultados
