@@ -93,3 +93,22 @@ def media_livros_por_editora():
     conn.close()
 
     return resultados
+
+-- 5. Função para Listar Autores sem Livros Publicados
+    def autores_sem_livros():
+    
+    conn = conectar_banco_de_dados()
+    cursor = conn.cursor()
+
+    consulta = "SELECT primeiro_nome, ultimo_nome FROM Autor WHERE id_autor NOT IN (SELECT id_autor FROM Livro_Autor)"
+
+   
+    cursor.execute(consulta)
+
+    
+    autores = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return autores
